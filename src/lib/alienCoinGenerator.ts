@@ -1,5 +1,6 @@
 import type { AlienCoin, TokenItem } from './types'
 import { modernSongs, modernMovies, trees, plantingLocations, treats, meals, gemstones, coins } from './alienCoinDatabase'
+import { radioStations, ancientCivilizations, rarePoetry, famousEquations, rareProps, chemistryEpisodes } from './enrichedDatabase'
 
 function simpleHash(str: string): string {
   let hash = 0
@@ -30,9 +31,9 @@ function selectFromArray<T>(array: T[], seed: string, categoryIndex: number): T 
 }
 
 function determineRarity(totalValue: number): 'standard' | 'premium' | 'rare' | 'legendary' {
-  if (totalValue >= 2.00) return 'legendary'
-  if (totalValue >= 1.50) return 'rare'
-  if (totalValue >= 1.20) return 'premium'
+  if (totalValue >= 2.50) return 'legendary'
+  if (totalValue >= 2.00) return 'rare'
+  if (totalValue >= 1.50) return 'premium'
   return 'standard'
 }
 
@@ -49,32 +50,50 @@ export async function mintAlienCoin(userId: string): Promise<AlienCoin> {
   const selectedMeal = selectFromArray(meals, seed, 5)
   const selectedGemstone = selectFromArray(gemstones, seed, 6)
   const selectedCoin = selectFromArray(coins, seed, 7)
+  const selectedRadio = selectFromArray(radioStations, seed, 8)
+  const selectedCivilization = selectFromArray(ancientCivilizations, seed, 9)
+  const selectedPoetry = selectFromArray(rarePoetry, seed, 10)
+  const selectedEquation = selectFromArray(famousEquations, seed, 11)
+  const selectedProp = selectFromArray(rareProps, seed, 12)
+  const selectedChemistry = selectFromArray(chemistryEpisodes, seed, 13)
 
   const items: TokenItem[] = [
     { category: 'song', entityId: selectedSong.id, displayOrder: 1 },
     { category: 'movie', entityId: selectedMovie.id, displayOrder: 2 },
-    { category: 'tree', entityId: selectedTree.id, displayOrder: 3 },
-    { category: 'location', entityId: selectedLocation.id, displayOrder: 4 },
-    { category: 'treat', entityId: selectedTreat.id, displayOrder: 5 },
-    { category: 'meal', entityId: selectedMeal.id, displayOrder: 6 },
-    { category: 'gemstone', entityId: selectedGemstone.id, displayOrder: 7 },
-    { category: 'coin', entityId: selectedCoin.id, displayOrder: 8 },
+    { category: 'radio', entityId: selectedRadio.id, displayOrder: 3 },
+    { category: 'tree', entityId: selectedTree.id, displayOrder: 4 },
+    { category: 'location', entityId: selectedLocation.id, displayOrder: 5 },
+    { category: 'treat', entityId: selectedTreat.id, displayOrder: 6 },
+    { category: 'meal', entityId: selectedMeal.id, displayOrder: 7 },
+    { category: 'gemstone', entityId: selectedGemstone.id, displayOrder: 8 },
+    { category: 'coin', entityId: selectedCoin.id, displayOrder: 9 },
+    { category: 'civilization', entityId: selectedCivilization.id, displayOrder: 10 },
+    { category: 'poetry', entityId: selectedPoetry.id, displayOrder: 11 },
+    { category: 'equation', entityId: selectedEquation.id, displayOrder: 12 },
+    { category: 'prop', entityId: selectedProp.id, displayOrder: 13 },
+    { category: 'chemistry', entityId: selectedChemistry.id, displayOrder: 14 },
   ]
 
   const totalValue = 
     selectedSong.value + 
     selectedMovie.value + 
     0.10 + 
+    0.10 + 
     0.08 + 
     0.12 + 
     0.15 + 
     0.10 + 
-    0.20
+    0.20 + 
+    0.12 + 
+    0.08 + 
+    0.10 + 
+    0.15 + 
+    0.10
 
   const rarity = determineRarity(totalValue)
 
-  const title = `${selectedMovie.title} × ${selectedSong.artist} Experience Bundle`
-  const summary = `Full movie, hit song, tree planting guide, rare gemstone intel, collectible coin history, regional recipe, and exotic treat - a complete cultural experience package worth $${totalValue.toFixed(2)}+`
+  const title = `${selectedMovie.title} × ${selectedSong.artist} Quantum Bundle`
+  const summary = `Movie, music, live radio, ancient wisdom, rare poetry, physics/chemistry, collectible props, tree planting, gemstones, recipes & more - complete cultural quantum package worth $${totalValue.toFixed(2)}+`
 
   const reportContent = JSON.stringify({ items, timestamp, title })
   const reportHash = simpleHash(reportContent)
@@ -85,7 +104,7 @@ export async function mintAlienCoin(userId: string): Promise<AlienCoin> {
     id: `alien-coin-${seed}`,
     createdAt: timestamp,
     seed,
-    version: '2.0',
+    version: '3.0',
     title,
     summary,
     items,
@@ -117,6 +136,18 @@ export function getCoinEntity(category: string, entityId: string) {
       return gemstones.find((g) => g.id === entityId)
     case 'coin':
       return coins.find((c) => c.id === entityId)
+    case 'radio':
+      return radioStations.find((r) => r.id === entityId)
+    case 'civilization':
+      return ancientCivilizations.find((c) => c.id === entityId)
+    case 'poetry':
+      return rarePoetry.find((p) => p.id === entityId)
+    case 'equation':
+      return famousEquations.find((e) => e.id === entityId)
+    case 'prop':
+      return rareProps.find((p) => p.id === entityId)
+    case 'chemistry':
+      return chemistryEpisodes.find((c) => c.id === entityId)
     default:
       return undefined
   }

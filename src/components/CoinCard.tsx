@@ -5,9 +5,11 @@ import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Input } from '@/components/ui/input'
-import { Sparkle, Play, FilmSlate, Tree, MapPin, Cookie, ForkKnife, Diamond, Coins, VideoCamera } from '@phosphor-icons/react'
-import { AlienCoin, Song, Movie, Tree as TreeType, PlantingLocation, TreatIdea, Meal, Gemstone, Coin } from '@/lib/types'
+import { Separator } from '@/components/ui/separator'
+import { Sparkle, Play, FilmSlate, Tree, MapPin, Cookie, ForkKnife, Diamond, Coins, VideoCamera, Radio, Book, Scroll, MathOperations, ShoppingCart, Flask } from '@phosphor-icons/react'
+import type { AlienCoin, Song, Movie, Tree as TreeType, PlantingLocation, TreatIdea, Meal, Gemstone, Coin, RadioStation, AncientCivilization, Poetry, Equation, RareProp, ChemistryEpisode } from '@/lib/types'
 import { getCoinEntity } from '@/lib/alienCoinGenerator'
+import { RadioPlayer } from '@/components/RadioPlayer'
 import { toast } from 'sonner'
 import { motion } from 'framer-motion'
 import { useKV } from '@github/spark/hooks'
@@ -30,6 +32,12 @@ export function CoinCard({ coin, onValueUpdate }: CoinCardProps) {
   const meal = getCoinEntity('meal', coin.items.find(i => i.category === 'meal')?.entityId || '') as Meal | undefined
   const gemstone = getCoinEntity('gemstone', coin.items.find(i => i.category === 'gemstone')?.entityId || '') as Gemstone | undefined
   const collectibleCoin = getCoinEntity('coin', coin.items.find(i => i.category === 'coin')?.entityId || '') as Coin | undefined
+  const radioStation = getCoinEntity('radio', coin.items.find(i => i.category === 'radio')?.entityId || '') as RadioStation | undefined
+  const civilization = getCoinEntity('civilization', coin.items.find(i => i.category === 'civilization')?.entityId || '') as AncientCivilization | undefined
+  const poetry = getCoinEntity('poetry', coin.items.find(i => i.category === 'poetry')?.entityId || '') as Poetry | undefined
+  const equation = getCoinEntity('equation', coin.items.find(i => i.category === 'equation')?.entityId || '') as Equation | undefined
+  const rareProp = getCoinEntity('prop', coin.items.find(i => i.category === 'prop')?.entityId || '') as RareProp | undefined
+  const chemistry = getCoinEntity('chemistry', coin.items.find(i => i.category === 'chemistry')?.entityId || '') as ChemistryEpisode | undefined
 
   const rarityColors = {
     standard: 'bg-secondary/20 text-secondary border-secondary/30',

@@ -123,8 +123,86 @@ export interface Meal {
   sources: Source[]
 }
 
+export interface RadioStation {
+  id: string
+  name: string
+  country: string
+  city: string
+  genre: string
+  language: string
+  streamUrl: string
+  website?: string
+  description: string
+  frequency?: string
+  established?: number
+}
+
+export interface AncientCivilization {
+  id: string
+  name: string
+  period: string
+  region: string
+  storyTitle: string
+  storyText: string
+  significance: string
+  artifacts: string[]
+  sources: Source[]
+}
+
+export interface Poetry {
+  id: string
+  title: string
+  poet: string
+  year: number
+  era: string
+  text: string
+  analysis: string
+  significance: string
+  sources: Source[]
+}
+
+export interface Equation {
+  id: string
+  name: string
+  field: 'physics' | 'chemistry' | 'mathematics'
+  formula: string
+  description: string
+  discoverer: string
+  year: number
+  applications: string[]
+  significance: string
+  sources: Source[]
+}
+
+export interface RareProp {
+  id: string
+  name: string
+  category: string
+  description: string
+  movieAppearances: string[]
+  historicalSignificance: string
+  estimatedValue: string
+  ebaySearchUrl: string
+  lastRefreshed: string
+  identificationTips: string
+  sources: Source[]
+}
+
+export interface ChemistryEpisode {
+  id: string
+  title: string
+  series: string
+  season: number
+  episode: number
+  chemicalConcept: string
+  description: string
+  educationalValue: string
+  youtubeUrl?: string
+  sources: Source[]
+}
+
 export interface TokenItem {
-  category: 'song' | 'movie' | 'tree' | 'location' | 'treat' | 'god' | 'coin' | 'quote' | 'gemstone' | 'meal'
+  category: 'song' | 'movie' | 'tree' | 'location' | 'treat' | 'god' | 'coin' | 'quote' | 'gemstone' | 'meal' | 'radio' | 'civilization' | 'poetry' | 'equation' | 'prop' | 'chemistry'
   entityId: string
   displayOrder: number
 }
