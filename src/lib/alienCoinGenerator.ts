@@ -1,7 +1,7 @@
-import type { AlienCoin, TokenItem } from './types'
+import type { AlienCoin, TokenItem, Movie } from './types'
 import {
   modernSongs,
-  modernMovies,
+  movies,
   trees,
   plantingLocations,
   treats,
@@ -58,7 +58,7 @@ export async function mintAlienCoin(userId: string): Promise<AlienCoin> {
   const seed = simpleHash(seedBase)
 
   const selectedSong = selectFromArray(modernSongs, seed, 0)
-  const selectedMovie = selectFromArray(modernMovies, seed, 1)
+  const selectedMovie = selectFromArray(movies, seed, 1)
   const selectedTree = selectFromArray(trees, seed, 2)
   const selectedLocation = selectFromArray(plantingLocations, seed, 3)
   const selectedTreat = selectFromArray(treats, seed, 4)
@@ -138,7 +138,7 @@ export function getCoinEntity(category: string, entityId: string) {
     case 'song':
       return modernSongs.find((s) => s.id === entityId)
     case 'movie':
-      return modernMovies.find((m) => m.id === entityId)
+      return movies.find((m: Movie) => m.id === entityId)
     case 'tree':
       return trees.find((t) => t.id === entityId)
     case 'location':
