@@ -15,6 +15,7 @@ import type {
   ChemistryEpisode,
   Quote,
 } from './types'
+import { expandedRareCoins } from './expandedCoins'
 
 export const modernSongs: Song[] = [
   {
@@ -486,7 +487,7 @@ export const gemstones: Gemstone[] = [
   },
 ]
 
-export const coins: Coin[] = [
+const baseCoins: Coin[] = [
   {
     id: 'coin-001',
     name: '1916-D Mercury Dime',
@@ -529,6 +530,8 @@ export const coins: Coin[] = [
     ],
   },
 ]
+
+export const coins: Coin[] = [...baseCoins, ...expandedRareCoins]
 
 export const modernMovies: Movie[] = [
   {
