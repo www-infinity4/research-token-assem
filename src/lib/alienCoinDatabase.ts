@@ -487,7 +487,7 @@ export const gemstones: Gemstone[] = [
   },
 ]
 
-const baseCoins: Coin[] = [
+export const coins: Coin[] = [
   {
     id: 'coin-001',
     name: '1916-D Mercury Dime',
@@ -530,8 +530,6 @@ const baseCoins: Coin[] = [
     ],
   },
 ]
-
-export const coins: Coin[] = [...baseCoins, ...expandedRareCoins]
 
 export const modernMovies: Movie[] = [
   {
