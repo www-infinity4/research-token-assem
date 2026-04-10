@@ -14,6 +14,7 @@ import {
   equations,
   rareProps,
   chemistryEpisodes,
+  presidentialQuotes,
 } from './alienCoinDatabase'
 
 function simpleHash(str: string): string {
