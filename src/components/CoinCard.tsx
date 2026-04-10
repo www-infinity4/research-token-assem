@@ -159,10 +159,12 @@ If the URL looks like a valid video link related to tree planting, set verified 
             <div className="flex gap-2 mt-3 flex-wrap">
               <Badge variant="outline" className="text-xs"><Play size={12} className="mr-1" weight="fill" />Song</Badge>
               <Badge variant="outline" className="text-xs"><FilmSlate size={12} className="mr-1" weight="fill" />Movie</Badge>
+              <Badge variant="outline" className="text-xs"><Radio size={12} className="mr-1" weight="fill" />Radio</Badge>
               <Badge variant="outline" className="text-xs"><Tree size={12} className="mr-1" weight="fill" />Tree</Badge>
-              <Badge variant="outline" className="text-xs"><ForkKnife size={12} className="mr-1" weight="fill" />Meal</Badge>
-              <Badge variant="outline" className="text-xs"><Diamond size={12} className="mr-1" weight="fill" />Gem</Badge>
-              <Badge variant="outline" className="text-xs"><Coins size={12} className="mr-1" weight="fill" />Coin</Badge>
+              <Badge variant="outline" className="text-xs"><Scroll size={12} className="mr-1" weight="fill" />Poetry</Badge>
+              <Badge variant="outline" className="text-xs"><MathOperations size={12} className="mr-1" weight="fill" />Science</Badge>
+              <Badge variant="outline" className="text-xs"><Flask size={12} className="mr-1" weight="fill" />Chem</Badge>
+              <Badge variant="outline" className="text-xs"><ShoppingCart size={12} className="mr-1" weight="fill" />Props</Badge>
             </div>
           </CardContent>
         </Card>

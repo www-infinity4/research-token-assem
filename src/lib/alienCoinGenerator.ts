@@ -1,6 +1,20 @@
 import type { AlienCoin, TokenItem } from './types'
-import { modernSongs, modernMovies, trees, plantingLocations, treats, meals, gemstones, coins } from './alienCoinDatabase'
-import { radioStations, ancientCivilizations, rarePoetry, famousEquations, rareProps, chemistryEpisodes } from './enrichedDatabase'
+import {
+  modernSongs,
+  modernMovies,
+  trees,
+  plantingLocations,
+  treats,
+  meals,
+  gemstones,
+  coins,
+  radioStations,
+  ancientCivilizations,
+  poetry,
+  equations,
+  rareProps,
+  chemistryEpisodes,
+} from './alienCoinDatabase'
 
 function simpleHash(str: string): string {
   let hash = 0
@@ -52,8 +66,8 @@ export async function mintAlienCoin(userId: string): Promise<AlienCoin> {
   const selectedCoin = selectFromArray(coins, seed, 7)
   const selectedRadio = selectFromArray(radioStations, seed, 8)
   const selectedCivilization = selectFromArray(ancientCivilizations, seed, 9)
-  const selectedPoetry = selectFromArray(rarePoetry, seed, 10)
-  const selectedEquation = selectFromArray(famousEquations, seed, 11)
+  const selectedPoetry = selectFromArray(poetry, seed, 10)
+  const selectedEquation = selectFromArray(equations, seed, 11)
   const selectedProp = selectFromArray(rareProps, seed, 12)
   const selectedChemistry = selectFromArray(chemistryEpisodes, seed, 13)
 
@@ -141,9 +155,9 @@ export function getCoinEntity(category: string, entityId: string) {
     case 'civilization':
       return ancientCivilizations.find((c) => c.id === entityId)
     case 'poetry':
-      return rarePoetry.find((p) => p.id === entityId)
+      return poetry.find((p) => p.id === entityId)
     case 'equation':
-      return famousEquations.find((e) => e.id === entityId)
+      return equations.find((e) => e.id === entityId)
     case 'prop':
       return rareProps.find((p) => p.id === entityId)
     case 'chemistry':
