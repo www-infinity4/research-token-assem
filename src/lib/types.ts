@@ -9,24 +9,26 @@ export interface Song {
   title: string
   artist: string
   year: number
-  archiveUrl?: string
   youtubeUrl?: string
+  imageUrl?: string
   genreTags: string[]
   durationSec: number
   sources: Source[]
   context?: string
+  value: number
 }
 
 export interface Movie {
   id: string
   title: string
   year: number
-  archiveUrl?: string
   youtubeUrl?: string
+  imageUrl?: string
   runtimeMin: number
   rating: string
   sources: Source[]
   synopsis?: string
+  value: number
 }
 
 export interface Tree {
@@ -144,4 +146,47 @@ export interface Citation {
   sourceUrl: string
   retrievedAt: string
   snippet?: string
+}
+
+export interface AlienCoin {
+  id: string
+  createdAt: string
+  seed: string
+  version: string
+  title: string
+  summary: string
+  items: TokenItem[]
+  reportHash: string
+  totalValue: number
+  imageUrl?: string
+  rarity: 'standard' | 'premium' | 'rare' | 'legendary'
+  ownerId: string
+}
+
+export interface MarketplaceListing {
+  id: string
+  coinId: string
+  sellerId: string
+  price: number
+  isBlindTrade: boolean
+  isPremium: boolean
+  premiumJustification?: string
+  listedAt: string
+}
+
+export interface UserWallet {
+  userId: string
+  balance: number
+  coins: AlienCoin[]
+  transactions: Transaction[]
+}
+
+export interface Transaction {
+  id: string
+  type: 'mint' | 'buy' | 'sell'
+  coinId: string
+  amount: number
+  timestamp: string
+  fromUserId?: string
+  toUserId?: string
 }

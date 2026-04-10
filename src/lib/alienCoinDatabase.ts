@@ -1,0 +1,195 @@
+import type {
+  Song,
+  Movie,
+} from './types'
+
+export const modernSongs: Song[] = [
+  {
+    id: 'song-001',
+    title: 'Take On Me',
+    artist: 'a-ha',
+    year: 1985,
+    youtubeUrl: 'https://www.youtube.com/watch?v=djV11Xbc914',
+    imageUrl: 'https://i.ytimg.com/vi/djV11Xbc914/maxresdefault.jpg',
+    genreTags: ['synth-pop', '80s', 'new wave'],
+    durationSec: 225,
+    value: 0.35,
+    context: 'Iconic 80s synth-pop hit with groundbreaking rotoscope animation music video.',
+    sources: [
+      {
+        title: 'a-ha - Take On Me (Official Video)',
+        url: 'https://www.youtube.com/watch?v=djV11Xbc914',
+        retrievedAt: '2024-01-15',
+      },
+    ],
+  },
+  {
+    id: 'song-002',
+    title: 'Sweet Child O\' Mine',
+    artist: 'Guns N\' Roses',
+    year: 1987,
+    youtubeUrl: 'https://www.youtube.com/watch?v=1w7OgIMMRc4',
+    imageUrl: 'https://i.ytimg.com/vi/1w7OgIMMRc4/maxresdefault.jpg',
+    genreTags: ['rock', 'hard rock', '80s'],
+    durationSec: 356,
+    value: 0.40,
+    context: 'Epic rock ballad with one of the most recognizable guitar riffs in history.',
+    sources: [
+      {
+        title: 'Guns N\' Roses - Sweet Child O\' Mine (Official Music Video)',
+        url: 'https://www.youtube.com/watch?v=1w7OgIMMRc4',
+        retrievedAt: '2024-01-15',
+      },
+    ],
+  },
+  {
+    id: 'song-003',
+    title: 'Billie Jean',
+    artist: 'Michael Jackson',
+    year: 1983,
+    youtubeUrl: 'https://www.youtube.com/watch?v=Zi_XLOBDo_Y',
+    imageUrl: 'https://i.ytimg.com/vi/Zi_XLOBDo_Y/maxresdefault.jpg',
+    genreTags: ['pop', 'funk', '80s'],
+    durationSec: 294,
+    value: 0.45,
+    context: 'Legendary pop track that defined a generation with its moonwalk debut.',
+    sources: [
+      {
+        title: 'Michael Jackson - Billie Jean (Official Video)',
+        url: 'https://www.youtube.com/watch?v=Zi_XLOBDo_Y',
+        retrievedAt: '2024-01-15',
+      },
+    ],
+  },
+  {
+    id: 'song-004',
+    title: 'Smells Like Teen Spirit',
+    artist: 'Nirvana',
+    year: 1991,
+    youtubeUrl: 'https://www.youtube.com/watch?v=hTWKbfoikeg',
+    imageUrl: 'https://i.ytimg.com/vi/hTWKbfoikeg/maxresdefault.jpg',
+    genreTags: ['grunge', 'rock', '90s'],
+    durationSec: 301,
+    value: 0.38,
+    context: 'Generation-defining grunge anthem that revolutionized rock music in the 90s.',
+    sources: [
+      {
+        title: 'Nirvana - Smells Like Teen Spirit (Official Music Video)',
+        url: 'https://www.youtube.com/watch?v=hTWKbfoikeg',
+        retrievedAt: '2024-01-15',
+      },
+    ],
+  },
+  {
+    id: 'song-005',
+    title: 'Thriller',
+    artist: 'Michael Jackson',
+    year: 1982,
+    youtubeUrl: 'https://www.youtube.com/watch?v=sOnqjkJTMaA',
+    imageUrl: 'https://i.ytimg.com/vi/sOnqjkJTMaA/maxresdefault.jpg',
+    genreTags: ['pop', 'funk', '80s', 'horror'],
+    durationSec: 357,
+    value: 0.50,
+    context: 'Most iconic music video ever made, transformed MTV and popular music.',
+    sources: [
+      {
+        title: 'Michael Jackson - Thriller (Official 4K Video)',
+        url: 'https://www.youtube.com/watch?v=sOnqjkJTMaA',
+        retrievedAt: '2024-01-15',
+      },
+    ],
+  },
+]
+
+export const modernMovies: Movie[] = [
+  {
+    id: 'movie-001',
+    title: 'Back to the Future',
+    year: 1985,
+    youtubeUrl: 'https://www.youtube.com/watch?v=qvsgGtivCgs',
+    imageUrl: 'https://m.media-amazon.com/images/M/MV5BZmU0M2Y1OGUtZjIxNi00ZjBkLTg1MjgtOWIyNThiZWIwYjRiXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg',
+    runtimeMin: 116,
+    rating: 'PG',
+    value: 0.40,
+    synopsis: 'Marty McFly accidentally travels back to 1955 in a time-traveling DeLorean and must ensure his parents fall in love or he\'ll cease to exist. Quintessential 80s adventure that defined time-travel movies.',
+    sources: [
+      {
+        title: 'Back to the Future - Trailer',
+        url: 'https://www.youtube.com/watch?v=qvsgGtivCgs',
+        retrievedAt: '2024-01-15',
+      },
+    ],
+  },
+  {
+    id: 'movie-002',
+    title: 'The Terminator',
+    year: 1984,
+    youtubeUrl: 'https://www.youtube.com/watch?v=k64P4l2Wmeg',
+    imageUrl: 'https://m.media-amazon.com/images/M/MV5BYTViNzMxZjEtZGEwNy00MDNiLWIzNGQtZDY2MjQ1OWViZjFmXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg',
+    runtimeMin: 107,
+    rating: 'R',
+    value: 0.38,
+    synopsis: 'A cybor assassin is sent back in time to kill Sarah Connor, whose unborn son will lead humanity against machines. Revolutionary sci-fi action that launched a franchise.',
+    sources: [
+      {
+        title: 'The Terminator - Trailer',
+        url: 'https://www.youtube.com/watch?v=k64P4l2Wmeg',
+        retrievedAt: '2024-01-15',
+      },
+    ],
+  },
+  {
+    id: 'movie-003',
+    title: 'The Matrix',
+    year: 1999,
+    youtubeUrl: 'https://www.youtube.com/watch?v=vKQi3bBA1y8',
+    imageUrl: 'https://m.media-amazon.com/images/M/MV5BN2NmN2VhMTQtMDNiOS00NDlhLTliMjgtODE2ZTY0ODQyNDRhXkEyXkFqcGdeQXVyNDk3NzU2MTQ@._V1_.jpg',
+    runtimeMin: 136,
+    rating: 'R',
+    value: 0.45,
+    synopsis: 'A hacker discovers reality is a simulation and joins a rebellion against machines. Groundbreaking action that revolutionized visual effects and philosophical sci-fi.',
+    sources: [
+      {
+        title: 'The Matrix - Trailer',
+        url: 'https://www.youtube.com/watch?v=vKQi3bBA1y8',
+        retrievedAt: '2024-01-15',
+      },
+    ],
+  },
+  {
+    id: 'movie-004',
+    title: 'Blade Runner',
+    year: 1982,
+    youtubeUrl: 'https://www.youtube.com/watch?v=eogpIG53Cis',
+    imageUrl: 'https://m.media-amazon.com/images/M/MV5BNzQzMzJhZTEtOWM4NS00MTdhLTg0YjgtMjM4MDRkZjUwZDBlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg',
+    runtimeMin: 117,
+    rating: 'R',
+    value: 0.42,
+    synopsis: 'A blade runner must pursue and terminate four replicants in dystopian Los Angeles. Visually stunning neo-noir that defined cyberpunk aesthetics.',
+    sources: [
+      {
+        title: 'Blade Runner - Trailer',
+        url: 'https://www.youtube.com/watch?v=eogpIG53Cis',
+        retrievedAt: '2024-01-15',
+      },
+    ],
+  },
+  {
+    id: 'movie-005',
+    title: 'The Shining',
+    year: 1980,
+    youtubeUrl: 'https://www.youtube.com/watch?v=5Cb3ik6zP2I',
+    imageUrl: 'https://m.media-amazon.com/images/M/MV5BZWFlYmY2MGEtZjVkYS00YzU4LTg0YjQtYzY1ZGE3NTA5NGQxXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg',
+    runtimeMin: 146,
+    rating: 'R',
+    value: 0.40,
+    synopsis: 'A family heads to an isolated hotel where an evil presence drives the father toward violence. Kubrick\'s masterpiece of psychological horror.',
+    sources: [
+      {
+        title: 'The Shining - Trailer',
+        url: 'https://www.youtube.com/watch?v=5Cb3ik6zP2I',
+        retrievedAt: '2024-01-15',
+      },
+    ],
+  },
+]
