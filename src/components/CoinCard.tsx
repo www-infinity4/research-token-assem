@@ -153,7 +153,7 @@ If the URL looks like a valid video link related to tree planting, set verified 
               <Badge variant="outline" className="text-xs"><FilmSlate size={12} className="mr-1" weight="fill" />Movie</Badge>
               <Badge variant="outline" className="text-xs"><Tree size={12} className="mr-1" weight="fill" />Tree</Badge>
               <Badge variant="outline" className="text-xs"><ForkKnife size={12} className="mr-1" weight="fill" />Meal</Badge>
-              <Badge variant="outline" className="text-xs"><Gem size={12} className="mr-1" weight="fill" />Gem</Badge>
+              <Badge variant="outline" className="text-xs"><Diamond size={12} className="mr-1" weight="fill" />Gem</Badge>
               <Badge variant="outline" className="text-xs"><Coins size={12} className="mr-1" weight="fill" />Coin</Badge>
             </div>
           </CardContent>
@@ -272,7 +272,7 @@ If the URL looks like a valid video link related to tree planting, set verified 
                     <span className="font-bold">Regional Recipe</span>
                   </div>
                   <div className="flex items-center gap-2 mb-2">
-                    <Gem size={16} weight="fill" className="text-primary" />
+                    <Diamond size={16} weight="fill" className="text-primary" />
                     <span className="font-bold">Gemstone History</span>
                   </div>
                   <div className="flex items-center gap-2 mb-2">
@@ -427,7 +427,7 @@ If the URL looks like a valid video link related to tree planting, set verified 
               <Card className="bg-primary/10 border-primary/30">
                 <CardHeader>
                   <div className="flex items-center gap-2 mb-2">
-                    <Gem size={20} className="text-primary" weight="fill" />
+                    <Diamond size={20} className="text-primary" weight="fill" />
                     <Badge variant="outline" className="font-[family-name:var(--font-orbitron)] text-xs">
                       GEMSTONE · $0.10
                     </Badge>
