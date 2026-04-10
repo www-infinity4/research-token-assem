@@ -31,8 +31,14 @@ function App() {
   }, [])
 
   const loadUser = async () => {
-    const userData = await window.spark.user()
-    setUser({ ...userData, id: String(userData.id) })
+    try {
+      const userData = await window.spark.user()
+      if (userData) {
+        setUser({ ...userData, id: String(userData.id) })
+      }
+    } catch (e) {
+      console.error('Failed to load user', e)
+    }
   }
 
   const handleMintCoin = async () => {
