@@ -161,6 +161,16 @@ export interface AlienCoin {
   imageUrl?: string
   rarity: 'standard' | 'premium' | 'rare' | 'legendary'
   ownerId: string
+  treePlanted?: TreePlanting
+}
+
+export interface TreePlanting {
+  coinId: string
+  treeId: string
+  plantedDate: string
+  videoUrl?: string
+  verified: boolean
+  valueBoost: number
 }
 
 export interface MarketplaceListing {
