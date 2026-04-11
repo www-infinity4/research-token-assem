@@ -67,7 +67,7 @@ Respond with ONLY a JSON object in this exact format:
 
 If the URL looks like a valid video link related to tree planting, set verified to true. Otherwise false.`
 
-      const response = await window.spark.llm(prompt, 'gpt-4o-mini', true)
+      const response = await window.spark.llm(prompt, 'gemma-3-27b-it', true)
       const result = JSON.parse(response)
 
       if (result.verified) {
@@ -546,6 +546,223 @@ If the URL looks like a valid video link related to tree planting, set verified 
                     <h4 className="font-bold text-sm mb-1">Collector Notes</h4>
                     <p className="text-sm">{collectibleCoin.collectorNotes}</p>
                   </div>
+                  {collectibleCoin.whereToFindLinks.length > 0 && (
+                    <div>
+                      <h4 className="font-bold text-sm mb-1">Where to Find</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {collectibleCoin.whereToFindLinks.map((link, i) => (
+                          <a key={i} href={link} target="_blank" rel="noopener noreferrer"
+                            className="text-xs text-accent hover:underline">
+                            View on PCGS/NGC →
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            )}
+
+            {radioStation && (
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <Radio size={20} className="text-primary" weight="fill" />
+                  <Badge variant="outline" className="font-[family-name:var(--font-orbitron)] text-xs">
+                    LIVE RADIO · $0.10
+                  </Badge>
+                </div>
+                <RadioPlayer station={radioStation} />
+              </div>
+            )}
+
+            {civilization && (
+              <Card className="bg-secondary/10 border-secondary/30">
+                <CardHeader>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Book size={20} className="text-secondary" weight="fill" />
+                    <Badge variant="outline" className="font-[family-name:var(--font-orbitron)] text-xs">
+                      ANCIENT HISTORY · $0.12
+                    </Badge>
+                  </div>
+                  <CardTitle className="font-[family-name:var(--font-inter)] text-xl">
+                    {civilization.name}
+                  </CardTitle>
+                  <p className="text-sm text-muted-foreground">
+                    {civilization.period} · {civilization.region}
+                  </p>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div>
+                    <h4 className="font-bold text-sm mb-2">{civilization.storyTitle}</h4>
+                    <p className="text-sm leading-relaxed">{civilization.storyText}</p>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-sm mb-1">Significance</h4>
+                    <p className="text-sm">{civilization.significance}</p>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-sm mb-1">Notable Artifacts</h4>
+                    <div className="flex flex-wrap gap-1">
+                      {civilization.artifacts.map(a => (
+                        <Badge key={a} variant="secondary" className="text-xs">{a}</Badge>
+                      ))}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {poetry && (
+              <Card className="bg-primary/10 border-primary/30">
+                <CardHeader>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Scroll size={20} className="text-primary" weight="fill" />
+                    <Badge variant="outline" className="font-[family-name:var(--font-orbitron)] text-xs">
+                      POETRY · $0.08
+                    </Badge>
+                  </div>
+                  <CardTitle className="font-[family-name:var(--font-inter)] text-xl">
+                    {poetry.title}
+                  </CardTitle>
+                  <p className="text-sm text-muted-foreground">
+                    by {poetry.poet} ({poetry.year}) · {poetry.era}
+                  </p>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="bg-muted/40 p-4 rounded italic text-sm leading-relaxed border-l-4 border-primary/40">
+                    {poetry.text}
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-sm mb-1">Analysis</h4>
+                    <p className="text-sm">{poetry.analysis}</p>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-sm mb-1">Cultural Significance</h4>
+                    <p className="text-sm">{poetry.significance}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {equation && (
+              <Card className="bg-accent/10 border-accent/30">
+                <CardHeader>
+                  <div className="flex items-center gap-2 mb-2">
+                    <MathOperations size={20} className="text-accent" weight="fill" />
+                    <Badge variant="outline" className="font-[family-name:var(--font-orbitron)] text-xs">
+                      SCIENCE · $0.10
+                    </Badge>
+                  </div>
+                  <CardTitle className="font-[family-name:var(--font-inter)] text-xl">
+                    {equation.name}
+                  </CardTitle>
+                  <p className="text-sm text-muted-foreground capitalize">{equation.field}</p>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="bg-muted/40 p-4 rounded text-center font-mono text-2xl font-bold text-accent">
+                    {equation.formula}
+                  </div>
+                  <p className="text-sm leading-relaxed">{equation.description}</p>
+                  <div className="grid grid-cols-2 gap-3 text-sm">
+                    <div>
+                      <span className="font-bold">Discoverer:</span> {equation.discoverer}
+                    </div>
+                    <div>
+                      <span className="font-bold">Year:</span> {equation.year}
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-sm mb-1">Applications</h4>
+                    <div className="flex flex-wrap gap-1">
+                      {equation.applications.map(app => (
+                        <Badge key={app} variant="secondary" className="text-xs">{app}</Badge>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-sm mb-1">Significance</h4>
+                    <p className="text-sm">{equation.significance}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {rareProp && (
+              <Card className="bg-secondary/10 border-secondary/30">
+                <CardHeader>
+                  <div className="flex items-center gap-2 mb-2">
+                    <ShoppingCart size={20} className="text-secondary" weight="fill" />
+                    <Badge variant="outline" className="font-[family-name:var(--font-orbitron)] text-xs">
+                      RARE PROP · $0.15
+                    </Badge>
+                  </div>
+                  <CardTitle className="font-[family-name:var(--font-inter)] text-xl">
+                    {rareProp.name}
+                  </CardTitle>
+                  <p className="text-sm text-muted-foreground">{rareProp.category}</p>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <p className="text-sm">{rareProp.description}</p>
+                  <div>
+                    <h4 className="font-bold text-sm mb-1">Movie Appearances</h4>
+                    <div className="flex flex-wrap gap-1">
+                      {rareProp.movieAppearances.map(m => (
+                        <Badge key={m} variant="outline" className="text-xs">{m}</Badge>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-sm mb-1">Historical Significance</h4>
+                    <p className="text-sm">{rareProp.historicalSignificance}</p>
+                  </div>
+                  <div className="bg-muted/50 p-3 rounded text-sm">
+                    <span className="font-bold">Estimated Value:</span> {rareProp.estimatedValue}
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-sm mb-1">Identification Tips</h4>
+                    <p className="text-sm">{rareProp.identificationTips}</p>
+                  </div>
+                  <a href={rareProp.ebaySearchUrl} target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm text-accent hover:underline">
+                    <ShoppingCart size={14} />
+                    Search on eBay →
+                  </a>
+                </CardContent>
+              </Card>
+            )}
+
+            {chemistry && (
+              <Card className="bg-primary/10 border-primary/30">
+                <CardHeader>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Flask size={20} className="text-primary" weight="fill" />
+                    <Badge variant="outline" className="font-[family-name:var(--font-orbitron)] text-xs">
+                      CHEMISTRY · $0.10
+                    </Badge>
+                  </div>
+                  <CardTitle className="font-[family-name:var(--font-inter)] text-xl">
+                    {chemistry.title}
+                  </CardTitle>
+                  <p className="text-sm text-muted-foreground">
+                    {chemistry.series} · S{chemistry.season}E{chemistry.episode}
+                  </p>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="bg-muted/40 px-3 py-2 rounded text-sm font-semibold text-primary">
+                    Concept: {chemistry.chemicalConcept}
+                  </div>
+                  <p className="text-sm">{chemistry.description}</p>
+                  <div>
+                    <h4 className="font-bold text-sm mb-1">Educational Value</h4>
+                    <p className="text-sm">{chemistry.educationalValue}</p>
+                  </div>
+                  {chemistry.youtubeUrl && (
+                    <a href={chemistry.youtubeUrl} target="_blank" rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm text-accent hover:underline">
+                      <Sparkle size={14} />
+                      Watch on YouTube →
+                    </a>
+                  )}
                 </CardContent>
               </Card>
             )}
