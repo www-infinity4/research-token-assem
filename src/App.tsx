@@ -9,6 +9,7 @@ import { Alien, Wallet, Storefront, Sparkle } from '@phosphor-icons/react'
 import { AlienCoin } from '@/lib/types'
 import { mintAlienCoin } from '@/lib/alienCoinGenerator'
 import { CoinCard } from '@/components/CoinCard'
+import { Toaster } from '@/components/ui/sonner'
 import { toast } from 'sonner'
 import { motion } from 'framer-motion'
 
@@ -105,7 +106,7 @@ function App() {
                         Balance
                       </div>
                       <div className="text-2xl font-bold text-accent font-[family-name:var(--font-orbitron)]">
-                        ${balance.toFixed(2)}
+                        ${(balance ?? 0).toFixed(2)}
                       </div>
                     </div>
                   </CardContent>
@@ -122,7 +123,7 @@ function App() {
                         {user.login}
                       </div>
                       <div className="text-xs text-muted-foreground">
-                        {walletCoins.length} Coins
+                        {(walletCoins ?? []).length} Coins
                       </div>
                     </div>
                   </CardContent>
@@ -227,15 +228,15 @@ function App() {
                   Your Collection
                 </h2>
                 <p className="text-muted-foreground font-[family-name:var(--font-inter)]">
-                  {walletCoins.length} Alien Coins • ${balance.toFixed(2)} Total Value
+                  {(walletCoins ?? []).length} Alien Coins • ${(balance ?? 0).toFixed(2)} Total Value
                 </p>
               </div>
               <Badge variant="outline" className="text-lg px-4 py-2 font-[family-name:var(--font-orbitron)]">
-                {walletCoins.length} COINS
+                {(walletCoins ?? []).length} COINS
               </Badge>
             </div>
 
-            {walletCoins.length === 0 ? (
+            {(walletCoins ?? []).length === 0 ? (
               <Card className="bg-card/50 border-dashed border-2 border-muted-foreground/30">
                 <CardContent className="py-16 text-center">
                   <Alien size={64} className="mx-auto mb-4 text-muted-foreground" weight="thin" />
@@ -253,7 +254,7 @@ function App() {
               </Card>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {walletCoins.map((coin, index) => (
+                {(walletCoins ?? []).map((coin, index) => (
                   <motion.div
                     key={coin.id}
                     initial={{ opacity: 0, y: 20 }}
@@ -282,6 +283,7 @@ function App() {
           </TabsContent>
         </Tabs>
       </div>
+      <Toaster />
     </div>
   )
 }
