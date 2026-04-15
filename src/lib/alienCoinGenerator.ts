@@ -39,10 +39,34 @@ function seededRandom(seed: string, index: number): number {
   return x - Math.floor(x)
 }
 
-function selectFromArray<T>(array: T[], seed: string, categoryIndex: number): T {
+async function getUsedItemIds(userId: string): Promise<Set<string>> {
+  const allUsed = await window.spark.kv.get<string[]>(`used-items-${userId}`) || []
+  return new Set(allUsed)
+}
+
+async function markItemsUsed(userId: string, itemIds: string[]): Promise<void> {
+  const currentUsed = await window.spark.kv.get<string[]>(`used-items-${userId}`) || []
+  const updated = [...new Set([...currentUsed, ...itemIds])]
+  await window.spark.kv.set(`used-items-${userId}`, updated)
+}
+
+function selectFromArray<T extends { id: string }>(
+  array: T[], 
+  seed: string, 
+  categoryIndex: number,
+  usedIds: Set<string>
+): T {
+  const available = array.filter(item => !usedIds.has(item.id))
+  
+  if (available.length === 0) {
+    const randomValue = seededRandom(seed, categoryIndex)
+    const index = Math.floor(randomValue * array.length)
+    return array[index]
+  }
+  
   const randomValue = seededRandom(seed, categoryIndex)
-  const index = Math.floor(randomValue * array.length)
-  return array[index]
+  const index = Math.floor(randomValue * available.length)
+  return available[index]
 }
 
 function determineRarity(totalValue: number): 'standard' | 'premium' | 'rare' | 'legendary' {
@@ -57,20 +81,41 @@ export async function mintAlienCoin(userId: string): Promise<AlienCoin> {
   const seedBase = `${userId}-${Date.now()}-alien`
   const seed = simpleHash(seedBase)
 
-  const selectedSong = selectFromArray(modernSongs, seed, 0)
-  const selectedMovie = selectFromArray(movies, seed, 1)
-  const selectedTree = selectFromArray(trees, seed, 2)
-  const selectedLocation = selectFromArray(plantingLocations, seed, 3)
-  const selectedTreat = selectFromArray(treats, seed, 4)
-  const selectedMeal = selectFromArray(meals, seed, 5)
-  const selectedGemstone = selectFromArray(gemstones, seed, 6)
-  const selectedCoin = selectFromArray(coins, seed, 7)
-  const selectedRadio = selectFromArray(radioStations, seed, 8)
-  const selectedCivilization = selectFromArray(ancientCivilizations, seed, 9)
-  const selectedPoetry = selectFromArray(poetry, seed, 10)
-  const selectedEquation = selectFromArray(equations, seed, 11)
-  const selectedProp = selectFromArray(rareProps, seed, 12)
-  const selectedChemistry = selectFromArray(chemistryEpisodes, seed, 13)
+  const usedIds = await getUsedItemIds(userId)
+
+  const selectedSong = selectFromArray(modernSongs, seed, 0, usedIds)
+  const selectedMovie = selectFromArray(movies, seed, 1, usedIds)
+  const selectedTree = selectFromArray(trees, seed, 2, usedIds)
+  const selectedLocation = selectFromArray(plantingLocations, seed, 3, usedIds)
+  const selectedTreat = selectFromArray(treats, seed, 4, usedIds)
+  const selectedMeal = selectFromArray(meals, seed, 5, usedIds)
+  const selectedGemstone = selectFromArray(gemstones, seed, 6, usedIds)
+  const selectedCoin = selectFromArray(coins, seed, 7, usedIds)
+  const selectedRadio = selectFromArray(radioStations, seed, 8, usedIds)
+  const selectedCivilization = selectFromArray(ancientCivilizations, seed, 9, usedIds)
+  const selectedPoetry = selectFromArray(poetry, seed, 10, usedIds)
+  const selectedEquation = selectFromArray(equations, seed, 11, usedIds)
+  const selectedProp = selectFromArray(rareProps, seed, 12, usedIds)
+  const selectedChemistry = selectFromArray(chemistryEpisodes, seed, 13, usedIds)
+  const selectedQuote = selectFromArray(presidentialQuotes, seed, 14, usedIds)
+
+  await markItemsUsed(userId, [
+    selectedSong.id,
+    selectedMovie.id,
+    selectedRadio.id,
+    selectedTree.id,
+    selectedLocation.id,
+    selectedTreat.id,
+    selectedMeal.id,
+    selectedGemstone.id,
+    selectedCoin.id,
+    selectedCivilization.id,
+    selectedPoetry.id,
+    selectedEquation.id,
+    selectedProp.id,
+    selectedChemistry.id,
+    selectedQuote.id,
+  ])
 
   const items: TokenItem[] = [
     { category: 'song', entityId: selectedSong.id, displayOrder: 1 },
@@ -87,6 +132,7 @@ export async function mintAlienCoin(userId: string): Promise<AlienCoin> {
     { category: 'equation', entityId: selectedEquation.id, displayOrder: 12 },
     { category: 'prop', entityId: selectedProp.id, displayOrder: 13 },
     { category: 'chemistry', entityId: selectedChemistry.id, displayOrder: 14 },
+    { category: 'quote', entityId: selectedQuote.id, displayOrder: 15 },
   ]
 
   const totalValue = 
@@ -108,7 +154,7 @@ export async function mintAlienCoin(userId: string): Promise<AlienCoin> {
   const rarity = determineRarity(totalValue)
 
   const title = `${selectedMovie.title} × ${selectedSong.artist} Quantum Bundle`
-  const summary = `Movie, music, live radio, ancient wisdom, rare poetry, physics/chemistry, collectible props, tree planting, gemstones, recipes & more - complete cultural quantum package worth $${totalValue.toFixed(2)}+`
+  const summary = `Movie, music, live radio, ancient wisdom, rare poetry, presidential quote, physics/chemistry, collectible props, tree planting, gemstones, recipes & more - complete cultural quantum package worth $${totalValue.toFixed(2)}+`
 
   const reportContent = JSON.stringify({ items, timestamp, title })
   const reportHash = simpleHash(reportContent)
@@ -163,6 +209,8 @@ export function getCoinEntity(category: string, entityId: string) {
       return rareProps.find((p) => p.id === entityId)
     case 'chemistry':
       return chemistryEpisodes.find((c) => c.id === entityId)
+    case 'quote':
+      return presidentialQuotes.find((q) => q.id === entityId)
     default:
       return undefined
   }
